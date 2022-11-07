@@ -1,18 +1,27 @@
-export default function App() {
-  return (
-    <div>
-      <h1>Meu Primeiro Projeto</h1>
-      <br />
+import { createBrowserRouter } from "react-router-dom";
 
-      <Aluno nome="Isadora Azevedo" />
-    </div>
-  );
-}
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+import Error from "./pages/Error";
 
-function Aluno({ nome }) {
-  return (
-    <div>
-      <h2>Bem-vinda {nome}</h2>
-    </div>
-  );
-}
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+  },
+  {
+    path: "*", //qualquer outro link dos que não estejam já listados acima
+    element: <Error />,
+  },
+]);
+
+export { router };

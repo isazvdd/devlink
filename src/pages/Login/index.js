@@ -1,5 +1,6 @@
 import "./login.css";
 import { Logo } from "../../components/Logo";
+import { Input } from "../../components/Input";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -37,14 +38,14 @@ export default function Login() {
       <Logo />
 
       <form className="form" onSubmit={handleLogin}>
-        <input
+        <Input
           type="email"
           placeholder="Digite aqui o seu email..."
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <input
+        <Input
           type="password"
           placeholder="***********"
           autoComplete="on"

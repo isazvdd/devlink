@@ -1,17 +1,35 @@
-import { useState } from "react";
-
 import "./login.css";
 import { Logo } from "../../components/Logo";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { auth } from "../../services/firebaseConection";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   function handleLogin(e) {
     e.preventDefault();
 
-    console.log(email);
-    console.log(password);
+    if (email === "" || password === "") {
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        toast.success("Bem vindo de volta :)");
+        navigate("/admin", { replace: true });
+      })
+      .catch(() => {
+        toast.error("Erro ao tentar fazer login!");
+      });
   }
 
   return (

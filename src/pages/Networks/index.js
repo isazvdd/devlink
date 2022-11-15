@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./networks.css";
 
 import { Header } from "../../components/Header";
@@ -15,6 +15,21 @@ export default function Networks() {
   const [github, setGithub] = useState("");
   const [linkedin, setLinkedin] = useState("");
 
+  useEffect(() => {
+    function loadLinks() {
+      const docRef = doc(db, "social", "link");
+      getDoc(docRef).then((snapshot) => {
+        if (snapshot.data() !== undefined) {
+          setWhatsapp(snapshot.data().whatsapp);
+          setInstagram(snapshot.data().instagram);
+          setGithub(snapshot.data().github);
+          setLinkedin(snapshot.data().linkedin);
+        }
+      });
+    }
+    loadLinks();
+  }, []);
+
   function handleSave(e) {
     e.preventDefault();
 
@@ -28,7 +43,7 @@ export default function Networks() {
         toast.success("Links salvos com sucesso!");
       })
       .catch((error) => {
-        toast.error("Erro ao salvar links. Tente novamente!");
+        toast.error("Erro ao salvar os links. Tente novamente!");
       });
   }
 
@@ -68,7 +83,7 @@ export default function Networks() {
         />
 
         <button type="submit" className="btn-register">
-          Salvar links <MdAddLink size={24} color="#FFF" />
+          Salvar links <MdAddLink size={24} color="#ffffff" />
         </button>
       </form>
     </div>

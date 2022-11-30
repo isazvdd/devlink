@@ -1,4 +1,0 @@
-Para a execução do projeto, é preciso executar a seguinte linha de código no terminal para poder rodar o programa.
-Dentro do  diretório do projeto, execute a linha a seguir:
-  npm start
-Isso irá "ligar" o npm e deixar ele funcionando em sua máquina, sendo assim, o projeto irá rodar.
